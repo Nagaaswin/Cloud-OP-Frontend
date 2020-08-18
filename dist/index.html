@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>AutoRclone</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"
+      defer
+    ></script>
+    <link rel="stylesheet" href="assets/styles/app.css" />
+    <script src="assets/scripts/App.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Copy Between Google Drives</h1>
+    </header>
+    <section id="copyingSection">
+      <h1>Drive Details</h1>
+      <form id="copyDetails">
+        <label for="sourceID">Src ID:</label>
+        <input type="text" name="srcId" /><br />
+        <br />
+        <label for="destinationID">Dst ID:</label>
+        <input type="text" name="destId" />
+        <br />
+        <br />
+        <input type="checkbox" name="singleAccount" value="TRUE" /> Special Case
+        <br />
+        <br />
+        <button type="submit">Copy</button>
+      </form>
+      <br />
+      <form id="stopCopy">
+        <button type="submit">Stop Copy</button>
+      </form>
+    </section>
+    <section id="descriptionSection">
+      <h1>Copy Status</h1>
+      <div id="description">
+        <p></p>
+      </div>
+    </section>
+  </body>
+</html>
