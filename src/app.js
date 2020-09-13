@@ -1,12 +1,12 @@
 const description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#copyDetails');
 const stopCopy = document.querySelector('#stopCopy');
-const url = 'http://general-arc-java.herokuapp.com'; // https://general-arc-java.herokuapp.com
+const url =  'https://general-arc-java.herokuapp.com' //  'http://localhost:5000'; // 
 let stompClient = null;
 
 stompClient = new window.StompJs.Client({
   webSocketFactory: function () {
-    return new WebSocket('ws://general-arc-java.herokuapp.com/websocket');
+    return new WebSocket('wss://general-arc-java.herokuapp.com/websocket');
   },
 });
 
