@@ -4,7 +4,6 @@ const stopCopy = document.querySelector('#stopCopy');
 const url =  'https://general-arc-java.herokuapp.com' //  'http://localhost:5000'; // 
 let stompClient = null;
 
-//checking
 stompClient = new window.StompJs.Client({
   webSocketFactory: function () {
     return new WebSocket('wss://general-arc-java.herokuapp.com/websocket');
