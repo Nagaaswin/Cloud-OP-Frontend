@@ -5,7 +5,7 @@ const url = 'https://general-arc-java.herokuapp.com'; //'http://localhost:5000';
 let stompClient = null;
 let flag = false;
 
-//checking
+
 stompClient = new window.StompJs.Client({
   webSocketFactory: function () {
     return new WebSocket('wss://general-arc-java.herokuapp.com/websocket');
@@ -23,10 +23,10 @@ stompClient.activate();
 
 function sendMessage() {
   stompClient.publish({
-    destination: '/app/send',
+    destination: '/app/copy',
     body: JSON.stringify({
-      from: 'asdsa',
-      message: 'adsa',
+      from: 'Copy',
+      message: 'Check for copy status',
     }),
   });
 }
@@ -41,7 +41,7 @@ function onSocketClose() {
 function frameHandler(frame) {
   console.log('Connected: ' + frame);
   sendMessage();
-  stompClient.subscribe('/topic/messages', function (message) {
+  stompClient.subscribe('/topic/copyMessages', function (message) {
     var msg = JSON.parse(message.body);
     if (msg.isalive == 'true') {
       flag = false;
