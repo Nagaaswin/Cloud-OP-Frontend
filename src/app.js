@@ -1,14 +1,14 @@
 const description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#copyDetails');
 const stopCopy = document.querySelector('#stopCopy');
-const url = 'https://general-arc-java.herokuapp.com'; //'http://localhost:5000'; //
+const url = 'http://localhost:5000'; //'https://general-arc-java.herokuapp.com'; //
 let stompClient = null;
 let flag = false;
 
 
 stompClient = new window.StompJs.Client({
   webSocketFactory: function () {
-    return new WebSocket('wss://general-arc-java.herokuapp.com/websocket');
+    return new WebSocket('ws://localhost:5000/websocket');
   },
 });
 
@@ -61,7 +61,7 @@ function showMessage(message) {
   }
 }
 
-axios.get(`${url}/setUpRclone`);
+axios.get(`${url}/setUpCopy`);
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -86,7 +86,7 @@ async function stopCopyHandler() {
 async function copyRequest() {
   try {
     const fd = new FormData(form);
-    axios.post(`${url}/change`, fd);
+    axios.post(`${url}/copy`, fd);
     setTimeout(sendMessage, 2000);
   } catch (err) {
     console.log(err);
