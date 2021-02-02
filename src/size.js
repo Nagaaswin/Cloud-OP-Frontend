@@ -1,8 +1,6 @@
 const description = document.querySelector('p:last-of-type');
-const form = document.querySelector('#copyDetails');
-const stopCopy = document.querySelector('#stopCopy');
-import { url } from './common.js';
-import {websocket} from './common.js'
+const form = document.querySelector('#folderDetails');
+import { url, websocket } from './common.js';
 let stompClient = null;
 let flag = false;
 
