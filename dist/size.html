@@ -15,38 +15,32 @@
       defer
     ></script>
     <link rel="stylesheet" href="assets/styles/common.css" />
-    <link rel="stylesheet" href="assets/styles/copy.css" />
-    <script src="assets/scripts/Copy.js" defer></script>
+    <link rel="stylesheet" href="assets/styles/size.css" />
+    <script src="assets/scripts/Size.js" defer></script>
   </head>
   <body>
     <div id="nav">
       <a id="copyNav" href="./index.html">Copy</a> <a id="sizeNav" href="./size.html">Size</a>
     </div>
     <header>
-      <h1>Copy Between Google Drives</h1>
+      <h1>Size Of Folder</h1>
     </header>
     <section id="inputSection">
-      <h1>Drive Details</h1>
-      <form id="copyDetails">
-        <label for="sourceID">Src ID:</label>
-        <input type="text" name="srcId" /><br />
-        <br />
-        <label for="destinationID">Dst ID:</label>
-        <input type="text" name="destId" />
+      <h1>Folder Details</h1>
+      <form id="folderDetails">
+        <label for="folderID">Folder ID:</label>
+        <input type="text" name="folderId" /><br />
         <br />
         <br />
-        <input type="checkbox" name="serviceAccounts" value="TRUE" /> Service Accounts
-        <br />
-        <br />
-        <button type="submit">Copy</button>
+        <button type="submit">Check Size</button>
       </form>
       <br />
-      <form id="stopCopy">
-        <button type="submit">Stop Copy</button>
+      <form id="stopCheckSize">
+        <button type="submit">Stop Checking</button>
       </form>
     </section>
     <section id="descriptionSection">
-      <h1>Copy Status</h1>
+      <h1>Size</h1>
       <div id="description">
         <p></p>
       </div>

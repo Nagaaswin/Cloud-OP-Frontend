@@ -1,14 +1,15 @@
 const description = document.querySelector('p:last-of-type');
-const form = document.querySelector('#copyDetails');
-const stopCopy = document.querySelector('#stopCopy');
-const url = 'https://general-arc-java.herokuapp.com'; //'http://localhost:5000'; //
+const form = document.querySelector('#folderDetails');
+const stopChecking = document.querySelector('#stopCheckSize');
+
+import { url, websocket } from './common.js';
+
 let stompClient = null;
 let flag = false;
 
-
 stompClient = new window.StompJs.Client({
   webSocketFactory: function () {
-    return new WebSocket('wss://general-arc-java.herokuapp.com/websocket');
+    return new WebSocket(websocket);
   },
 });
 
@@ -23,10 +24,10 @@ stompClient.activate();
 
 function sendMessage() {
   stompClient.publish({
-    destination: '/app/copy',
+    destination: '/app/checkSizeMsg',
     body: JSON.stringify({
-      from: 'Copy',
-      message: 'Check for copy status',
+      from: 'Check Size',
+      message: 'Check for size status',
     }),
   });
 }
@@ -41,14 +42,18 @@ function onSocketClose() {
 function frameHandler(frame) {
   console.log('Connected: ' + frame);
   sendMessage();
-  stompClient.subscribe('/topic/copyMessages', function (message) {
+  stompClient.subscribe('/topic/checkSizeMessages', function (message) {
     var msg = JSON.parse(message.body);
     if (msg.isalive == 'true') {
       flag = false;
       showMessage(msg);
-      sendMessage();
+      // sendMessage();
     } else {
       flag = true;
+      description.insertAdjacentHTML(
+        'afterend',
+        '<p>Currently, No Process is Running.</p>'
+      );
       return;
     }
   });
@@ -66,28 +71,33 @@ axios.get(`${url}/setUpRclone`);
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   if (flag) {
-    copyRequest();
+    checkRequest();
+  } else {
+    description.insertAdjacentHTML(
+      'afterend',
+      '<p>Process is already running,Cannot send new Request.</p>'
+    );
   }
 });
 
-stopCopy.addEventListener('submit', (event) => {
-  event.preventDefault();
-  stopCopyHandler();
-});
-
-async function stopCopyHandler() {
+async function checkRequest() {
   try {
-    axios.get(`${url}/stopCopying`);
+    const fd = new FormData(form);
+    axios.post(`${url}/checkSize`, fd);
+    setInterval(sendMessage, 10000);
   } catch (err) {
     console.log(err);
   }
 }
 
-async function copyRequest() {
+stopChecking.addEventListener('submit', (event) => {
+  event.preventDefault();
+  stopCheckSizeHandler();
+});
+
+async function stopCheckSizeHandler() {
   try {
-    const fd = new FormData(form);
-    axios.post(`${url}/change`, fd);
-    setTimeout(sendMessage, 2000);
+    axios.get(`${url}/stopCheckingSize`);
   } catch (err) {
     console.log(err);
   }

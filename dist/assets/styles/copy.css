@@ -1,0 +1,43 @@
+#copyNav {
+  text-decoration: none;
+  background-color: black;
+}
+#copyNav  {
+  color:yellowgreen;
+  background-color: black;
+  text-decoration: none;
+  margin: 30px;
+}
+#copyNav:link {
+  color:yellowgreen;
+}
+#copyNav:visited {
+  color:yellowgreen;
+}
+#copyNav:hover {
+  color:yellowgreen;
+}
+#copyNav:active {
+  color:yellowgreen;
+}
+#sizeNav {
+  text-decoration: none;
+  background-color: black;
+}
+#sizeNav   {
+  color:white;
+  background-color: black;
+  text-decoration: none;
+}
+#sizeNav:link {
+  color:red;
+}
+#sizeNav:visited {
+  color:red;
+}
+#sizeNav:hover {
+  color:yellow;
+}
+#sizeNav:active {
+  color:yellow;
+}
