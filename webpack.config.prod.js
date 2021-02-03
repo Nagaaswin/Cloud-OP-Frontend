@@ -4,7 +4,8 @@ const CleanPlugin = require('clean-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    App: './src/app.js',
+    Copy: './src/copy.js',
+    Size: './src/size.js'
   },
   output: {
     filename: '[name].js',

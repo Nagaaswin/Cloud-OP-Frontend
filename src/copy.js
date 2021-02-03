@@ -2,10 +2,9 @@ const description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#copyDetails');
 const stopCopy = document.querySelector('#stopCopy');
 import { url } from './common.js';
-import {websocket} from './common.js'
+import { websocket } from './common.js';
 let stompClient = null;
 let flag = false;
-
 
 stompClient = new window.StompJs.Client({
   webSocketFactory: function () {
@@ -24,7 +23,7 @@ stompClient.activate();
 
 function sendMessage() {
   stompClient.publish({
-    destination: '/app/copy',
+    destination: '/app/copyMsg',
     body: JSON.stringify({
       from: 'Copy',
       message: 'Check for copy status',
@@ -50,6 +49,10 @@ function frameHandler(frame) {
       sendMessage();
     } else {
       flag = true;
+      description.insertAdjacentHTML(
+        'afterend',
+        '<p>Currently, No Process is Running.</p>'
+      );
       return;
     }
   });
@@ -62,12 +65,17 @@ function showMessage(message) {
   }
 }
 
-axios.get(`${url}/setUpCopy`);
+axios.get(`${url}/setUpRclone`);
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   if (flag) {
     copyRequest();
+  } else {
+    description.insertAdjacentHTML(
+      'afterend',
+      '<p>Process is already running,Cannot send new Request.</p>'
+    );
   }
 });
 
