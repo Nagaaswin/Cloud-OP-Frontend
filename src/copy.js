@@ -66,6 +66,7 @@ function showMessage(message) {
 }
 
 axios.get(`${url}/setUpRclone`);
+setInterval(sendMessage, 10000);
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -96,7 +97,6 @@ async function copyRequest() {
   try {
     const fd = new FormData(form);
     axios.post(`${url}/copy`, fd);
-    setTimeout(sendMessage, 2000);
   } catch (err) {
     console.log(err);
   }
