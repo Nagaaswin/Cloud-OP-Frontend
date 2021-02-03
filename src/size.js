@@ -68,6 +68,8 @@ function showMessage(message) {
 
 axios.get(`${url}/setUpRclone`);
 
+setInterval(sendMessage, 10000);
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   if (flag) {
@@ -84,7 +86,6 @@ async function checkRequest() {
   try {
     const fd = new FormData(form);
     axios.post(`${url}/checkSize`, fd);
-    setInterval(sendMessage, 10000);
   } catch (err) {
     console.log(err);
   }
