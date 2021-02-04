@@ -1,6 +1,7 @@
 const description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#copyDetails');
 const stopCopy = document.querySelector('#stopCopy');
+let repeatingDescreption = description;
 import { url } from './common.js';
 import { websocket } from './common.js';
 let stompClient = null;
@@ -49,10 +50,15 @@ function frameHandler(frame) {
       sendMessage();
     } else {
       flag = true;
-      description.insertAdjacentHTML(
-        'afterend',
-        '<p>Currently, No Process is Running.</p>'
-      );
+      if (
+        repeatingDescreption.innerHTML != 'Currently, No Process is Running.'
+      ) {
+        description.insertAdjacentHTML(
+          'afterend',
+          '<p>Currently, No Process is Running.</p>'
+        );
+        messageLog();
+      }
       return;
     }
   });
@@ -73,10 +79,16 @@ form.addEventListener('submit', (event) => {
   if (flag) {
     copyRequest();
   } else {
-    description.insertAdjacentHTML(
-      'afterend',
-      '<p>Process is already running,Cannot send new Request.</p>'
-    );
+    if (
+      repeatingDescreption.innerHTML !=
+      'Process is already running,Cannot send new Request.'
+    ) {
+      description.insertAdjacentHTML(
+        'afterend',
+        '<p>Process is already running,Cannot send new Request.</p>'
+      );
+      messageLog();
+    }
   }
 });
 
@@ -100,4 +112,8 @@ async function copyRequest() {
   } catch (err) {
     console.log(err);
   }
+}
+
+function messageLog() {
+  repeatingDescreption = document.querySelector('p:last-of-type');
 }

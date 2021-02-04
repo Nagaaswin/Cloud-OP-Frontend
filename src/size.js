@@ -1,6 +1,7 @@
 const description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#folderDetails');
 const stopChecking = document.querySelector('#stopCheckSize');
+let repeatingDescreption = description;
 
 import { url, websocket } from './common.js';
 
@@ -47,13 +48,17 @@ function frameHandler(frame) {
     if (msg.isalive == 'true') {
       flag = false;
       showMessage(msg);
-      // sendMessage();
     } else {
       flag = true;
-      description.insertAdjacentHTML(
-        'afterend',
-        '<p>Currently, No Process is Running.</p>'
-      );
+      if (
+        repeatingDescreption.innerHTML != 'Currently, No Process is Running.'
+      ) {
+        description.insertAdjacentHTML(
+          'afterend',
+          '<p>Currently, No Process is Running.</p>'
+        );
+        messageLog();
+      }
       return;
     }
   });
@@ -62,7 +67,10 @@ function frameHandler(frame) {
 function showMessage(message) {
   const contents = message.content;
   for (const content of contents) {
-    description.insertAdjacentHTML('afterend', `<p>${content}</p>`);
+    if (repeatingDescreption.innerHTML != 'Size checking is already Running.') {
+      description.insertAdjacentHTML('afterend', `<p>${content}</p>`);
+      messageLog();
+    }
   }
 }
 
@@ -75,10 +83,16 @@ form.addEventListener('submit', (event) => {
   if (flag) {
     checkRequest();
   } else {
-    description.insertAdjacentHTML(
-      'afterend',
-      '<p>Process is already running,Cannot send new Request.</p>'
-    );
+    if (
+      repeatingDescreption.innerHTML !=
+      'Process is already running,Cannot send new Request.'
+    ) {
+      description.insertAdjacentHTML(
+        'afterend',
+        '<p>Process is already running,Cannot send new Request.</p>'
+      );
+      messageLog();
+    }
   }
 });
 
@@ -102,4 +116,8 @@ async function stopCheckSizeHandler() {
   } catch (err) {
     console.log(err);
   }
+}
+
+function messageLog() {
+  repeatingDescreption = document.querySelector('p:last-of-type');
 }
