@@ -1,8 +1,7 @@
-const description = document.querySelector('p:last-of-type');
+let description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#folderDetails');
 const stopChecking = document.querySelector('#stopCheckSize');
-let repeatingDescreption = description;
-
+const descriptionSection = document.querySelector('#description');
 import { url, websocket } from './common.js';
 
 let stompClient = null;
@@ -50,14 +49,11 @@ function frameHandler(frame) {
       showMessage(msg);
     } else {
       flag = true;
-      if (
-        repeatingDescreption.innerHTML != 'Currently, No Process is Running.'
-      ) {
-        description.insertAdjacentHTML(
-          'afterend',
-          '<p>Currently, No Process is Running.</p>'
-        );
-        messageLog();
+      if (description.innerHTML != 'Currently, No Process is Running.') {
+        let newEl = document.createElement('p');
+        newEl.innerHTML = 'Currently, No Process is Running.';
+        insertAfter(newEl, description);
+        scrollDown();
       }
       return;
     }
@@ -67,9 +63,14 @@ function frameHandler(frame) {
 function showMessage(message) {
   const contents = message.content;
   for (const content of contents) {
-    if (repeatingDescreption.innerHTML != 'Size checking is already Running.') {
-      description.insertAdjacentHTML('afterend', `<p>${content}</p>`);
-      messageLog();
+    if (
+      description.innerHTML != 'Size checking is already Running.' ||
+      content != 'Size checking is already Running.'
+    ) {
+      let newEl = document.createElement('p');
+      newEl.innerHTML = `${content}`;
+      insertAfter(newEl, description);
+      scrollDown();
     }
   }
 }
@@ -84,14 +85,13 @@ form.addEventListener('submit', (event) => {
     checkRequest();
   } else {
     if (
-      repeatingDescreption.innerHTML !=
+      description.innerHTML !=
       'Process is already running,Cannot send new Request.'
     ) {
-      description.insertAdjacentHTML(
-        'afterend',
-        '<p>Process is already running,Cannot send new Request.</p>'
-      );
-      messageLog();
+      let newEl = document.createElement('p');
+      newEl.innerHTML = 'Process is already running,Cannot send new Request.';
+      insertAfter(newEl, description);
+      scrollDown();
     }
   }
 });
@@ -118,6 +118,11 @@ async function stopCheckSizeHandler() {
   }
 }
 
-function messageLog() {
-  repeatingDescreption = document.querySelector('p:last-of-type');
+function insertAfter(el, referenceNode) {
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+  description = el;
+}
+
+function scrollDown() {
+  descriptionSection.scrollTop = descriptionSection.scrollHeight;
 }
