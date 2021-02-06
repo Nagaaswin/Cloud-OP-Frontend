@@ -1,17 +1,18 @@
-let description = document.querySelector('p:last-of-type');
 const form = document.querySelector('#folderDetails');
 const stopChecking = document.querySelector('#stopCheckSize');
-const descriptionSection = document.querySelector('#description');
-import { url, websocket } from './common.js';
-
-let stompClient = null;
 let flag = false;
 
-stompClient = new window.StompJs.Client({
-  webSocketFactory: function () {
-    return new WebSocket(websocket);
-  },
-});
+import {
+  url,
+  stompClientConnect,
+  stompClient,
+  onSocketClose,
+  noProcessRunning,
+  statusMessage,
+  processAlreadyRunning,
+} from './common.js';
+
+stompClientConnect();
 
 stompClient.onConnect = function (frame) {
   frameHandler(frame);
@@ -32,13 +33,6 @@ function sendMessage() {
   });
 }
 
-function onSocketClose() {
-  if (stompClient !== null) {
-    stompClient.deactivate();
-  }
-  console.log('Socket was closed. Setting connected to false!');
-}
-
 function frameHandler(frame) {
   console.log('Connected: ' + frame);
   sendMessage();
@@ -49,12 +43,7 @@ function frameHandler(frame) {
       showMessage(msg);
     } else {
       flag = true;
-      if (description.innerHTML != 'Currently, No Process is Running.') {
-        let newEl = document.createElement('p');
-        newEl.innerHTML = 'Currently, No Process is Running.';
-        insertAfter(newEl, description);
-        scrollDown();
-      }
+      noProcessRunning();
       return;
     }
   });
@@ -63,15 +52,7 @@ function frameHandler(frame) {
 function showMessage(message) {
   const contents = message.content;
   for (const content of contents) {
-    if (
-      description.innerHTML != 'Size checking is already Running.' ||
-      content != 'Size checking is already Running.'
-    ) {
-      let newEl = document.createElement('p');
-      newEl.innerHTML = `${content}`;
-      insertAfter(newEl, description);
-      scrollDown();
-    }
+    statusMessage(content);
   }
 }
 
@@ -84,15 +65,7 @@ form.addEventListener('submit', (event) => {
   if (flag) {
     checkRequest();
   } else {
-    if (
-      description.innerHTML !=
-      'Process is already running,Cannot send new Request.'
-    ) {
-      let newEl = document.createElement('p');
-      newEl.innerHTML = 'Process is already running,Cannot send new Request.';
-      insertAfter(newEl, description);
-      scrollDown();
-    }
+    processAlreadyRunning();
   }
 });
 
@@ -116,13 +89,4 @@ async function stopCheckSizeHandler() {
   } catch (err) {
     console.log(err);
   }
-}
-
-function insertAfter(el, referenceNode) {
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-  description = el;
-}
-
-function scrollDown() {
-  descriptionSection.scrollTop = descriptionSection.scrollHeight;
 }
