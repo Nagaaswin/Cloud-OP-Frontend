@@ -1,6 +1,6 @@
-export const url ='http://localhost:5000';  // 'https://general-arc-java-1.herokuapp.com';// 'https://general-arc-java.herokuapp.com'; //
+export const url ='https://general-arc-java.herokuapp.com'; //'http://localhost:5000';  // 'https://general-arc-java-1.herokuapp.com';// 
 
-const websocket = 'ws://localhost:5000/websocket';  // 'wss://general-arc-java-1.herokuapp.com/websocket'; //'wss://general-arc-java.herokuapp.com/websocket' //
+const websocket = 'wss://general-arc-java.herokuapp.com/websocket'; //'ws://localhost:5000/websocket';  // 'wss://general-arc-java-1.herokuapp.com/websocket'; // 
 
 let description = document.querySelector('p:last-of-type');
 
