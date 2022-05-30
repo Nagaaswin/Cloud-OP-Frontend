@@ -1,0 +1,11 @@
+.my-5 {
+  background: linear-gradient(
+    180deg,
+    rgba(184, 129, 227, 0.81) 0.84%,
+    rgba(129, 151, 227, 0.72) 55.52%,
+    rgba(93, 135, 242, 0.56) 93.02%
+  );
+  box-shadow: 5px 9px 50px 14px rgba(0, 0, 0, 0.25);
+  border: transparent;
+  border-radius: 20px;
+}
