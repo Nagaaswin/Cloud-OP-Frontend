@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OperationSummaryComponent } from './operation-summary.component';
+import { SizeTechnicalsComponent } from './size-technicals.component';
 
-describe('OperationSummaryComponent', () => {
-  let component: OperationSummaryComponent;
-  let fixture: ComponentFixture<OperationSummaryComponent>;
+describe('SizeTechnicalsComponent', () => {
+  let component: SizeTechnicalsComponent;
+  let fixture: ComponentFixture<SizeTechnicalsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OperationSummaryComponent ]
+      declarations: [ SizeTechnicalsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OperationSummaryComponent);
+    fixture = TestBed.createComponent(SizeTechnicalsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

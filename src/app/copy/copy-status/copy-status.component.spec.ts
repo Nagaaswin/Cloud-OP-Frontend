@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OperationTechnicalComponent } from './operation-technical.component';
+import { CopyStatusComponent } from './copy-status.component';
 
-describe('OperationTechnicalComponent', () => {
-  let component: OperationTechnicalComponent;
-  let fixture: ComponentFixture<OperationTechnicalComponent>;
+describe('CopyStatusComponent', () => {
+  let component: CopyStatusComponent;
+  let fixture: ComponentFixture<CopyStatusComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OperationTechnicalComponent ]
+      declarations: [ CopyStatusComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OperationTechnicalComponent);
+    fixture = TestBed.createComponent(CopyStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

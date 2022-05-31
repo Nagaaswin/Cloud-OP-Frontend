@@ -20,7 +20,7 @@
           class="nav-link text text-white text-monospace"
           role="presentation"
           routerLinkActive="active"
-          routerLink="/copy"
+          [routerLink]="[{ outlets: { primary: ['copy'], summary: ['copy'] } }]"
           >Copy</a
         >
       </li>
@@ -29,7 +29,7 @@
           class="nav-link text text-white text-monospace h-4"
           role="presentation"
           routerLinkActive="active"
-          routerLink="/size"
+          [routerLink]="[{ outlets: { primary: ['size'], summary: ['size'] } }]"
           >Size</a
         >
       </li>
