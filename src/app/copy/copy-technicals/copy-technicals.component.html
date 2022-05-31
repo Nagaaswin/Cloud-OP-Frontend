@@ -1,31 +1,32 @@
 <nav class="navbar navbar-expand-sm mb-3">
 <h3 class="mx-auto text-center lead text-white align-middle"><strong>DRIVE DETAILS</strong></h3>
-<img src="../../assets/google-plus-symbol.png" class="mr-1" alt="googleplus" width="25" height="25">
+<!-- <img src="../../assets/google-plus-symbol.png" class="mr-1" alt="googleplus" width="25" height="25"> -->
 </nav>
 <form class="form-horizontal">
-    <div class="form-group">
-      <label class="control-label col-sm-3 text-white lead Display 4" for="source id"><small>Source ID:</small></label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control rounded-pill shadow" id="email" placeholder="Enter Source ID">
+    <div class="form-group row">
+      <label class="control-label col-sm-3 text-white lead Display 4" for="source id"><small>Source ID</small></label>
+      <div class="col-sm-9"> 
+        <input type="text" class="form-control rounded-pill shadow" id="source id">
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4 text-white lead Display 4" for="destination id"><small>Destination ID:</small></label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control rounded-pill shadow" id="pwd" placeholder="Enter Destination ID">
+    <div class="form-group row">
+      <label class="control-label col-sm-3 text-white lead Display 4" for="destination id"><small>Destination ID</small></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control rounded-pill shadow" id="destination id">
       </div>
     </div>
     <div class="form-group">        
         <div class="col-sm-offset-3 col-sm-10 ml-5">
-          <div class="checkbox text-center">
+          <div class="checkbox text-center text-white">
             <label><input type="checkbox" name="service accounts">Service Accounts</label>
           </div>
         </div>
     </div>
     <div class="form-group">        
         <div class="text-center">
-          <button type="submit" class="btn btn-sm text-center rounded-pill shadow bg-white text-dark ml-3">Copy</button>
-          <button type="submit" class="btn btn-sm text-center rounded-pill shadow bg-danger text-dark ml-3">Cancel</button>
+          <button type="submit" class="btn btn-sm text-center rounded-pill shadow bg-white text-dark ml-2" style="width: 100px;">Copy</button>
+          <button type="submit" class="btn btn-sm text-center rounded-pill shadow bg-danger text-white ml-3" style="width: 100px;">Cancel</button>
         </div>
     </div>
 </form>
+<br>
