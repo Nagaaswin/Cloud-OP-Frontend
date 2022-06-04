@@ -1,11 +1,13 @@
 h3{
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
+    font-size: 2vw;
 }
 
 .control-label {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
+    font-size: 1.5vw;
 }
 
 .checkbox {
@@ -16,5 +18,5 @@ h3{
 .button {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
-
+    font-size: 2vw;
 }

@@ -5,5 +5,30 @@
 .nav-item {
   font-family: 'Quicksand', sans-serif;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.5vw
+}
+
+.navbar .navbar-nav .link1:visited{
+  color:  black;
+}
+
+.navbar .navbar-nav .link1:hover{
+  color:  aqua;
+}
+
+
+.navbar .navbar-nav .link1:focus{
+  color:   rgb(255, 0, 123);
+}
+
+.navbar .navbar-nav .link2:visited{
+  color:  white
+}
+
+.navbar .navbar-nav .link2:hover{
+  color: aqua;
+}
+
+.navbar .navbar-nav .link2:focus{
+  color:  rgb(255, 0, 123);
 }

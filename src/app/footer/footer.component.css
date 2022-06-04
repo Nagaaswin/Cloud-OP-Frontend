@@ -1,5 +1,12 @@
 p {
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1vw;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+
 }
