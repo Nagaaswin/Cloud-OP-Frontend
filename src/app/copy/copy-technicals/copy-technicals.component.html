@@ -1,1 +1,63 @@
-<p>copy-technicals works!</p>
+<nav class="navbar navbar-expand-sm mb-3 mt-4">
+  <h3 class="mx-auto text-center lead text-white align-middle">
+    DRIVE DETAILS
+  </h3>
+</nav>
+<form class="form-horizontal">
+  <div class="form-group row mx-4">
+    <label class="control-label col-sm-3 offset-sm-2 text-white" for="source id"
+      >Source ID</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control rounded-pill shadow"
+        id="source id"
+      />
+    </div>
+  </div>
+  <div class="form-group row mx-4">
+    <label
+      class="control-label col-sm-3 offset-sm-2 text-white"
+      for="destination id"
+      >Destination ID</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control rounded-pill shadow"
+        id="destination id"
+      />
+    </div>
+  </div>
+  <div class="form-group row mx-4">
+    <div class="col-sm-7 offset-sm-5">
+      <div class="checkbox-label text-white px-4">
+        <label
+          ><input
+            type="checkbox"
+            name="serviceAccounts"
+            class="checkbox"
+          />&nbsp; Service Accounts</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="form-group row mx-4">
+    <div class="col-sm-7 offset-sm-5">
+      <button
+        type="submit"
+        class="col-sm-2 btn btn-sm rounded-pill shadow bg-white text-dark mr-5"
+      >
+        Copy
+      </button>
+      <button
+        type="submit"
+        class="col-sm-2 btn btn-sm rounded-pill shadow bg-danger text-white"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+<br />

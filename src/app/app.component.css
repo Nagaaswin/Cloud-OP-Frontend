@@ -1,7 +1,10 @@
+.root {
+  height: 100vh;
+}
+
 .row {
   margin: auto;
 }
-
 .summary {
   background: linear-gradient(
     180deg,
@@ -12,4 +15,13 @@
   box-shadow: 5px 9px 50px 14px rgba(0, 0, 0, 0.25);
   border: transparent;
   border-radius: 20px;
+  max-height: 100%;
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
 }

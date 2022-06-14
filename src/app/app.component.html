@@ -1,10 +1,12 @@
-<div class="row m-4">
-  <div class="col-md-5 summary">
+<div class="container-fluid row mx-0 root">
+  <div class="col-sm-4 summary">
     <app-header></app-header>
     <router-outlet name="summary"></router-outlet>
-    <app-footer></app-footer>
+    <div class="row">
+      <app-footer class="footer col-sm-11 offset-sm-1"></app-footer>
+    </div>
   </div>
-  <div class="col-md-7">
+  <div class="col-sm-8">
     <router-outlet></router-outlet>
   </div>
 </div>
