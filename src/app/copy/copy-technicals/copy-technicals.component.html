@@ -1,32 +1,63 @@
 <nav class="navbar navbar-expand-sm mb-3 mt-4">
-<h3 class="mx-auto text-center lead text-white align-middle">DRIVE DETAILS</h3>
-<!-- <img src="../../assets/google-plus-symbol.png" class="mr-1" alt="googleplus" width="25" height="25"> -->
+  <h3 class="mx-auto text-center lead text-white align-middle">
+    DRIVE DETAILS
+  </h3>
 </nav>
 <form class="form-horizontal">
-    <div class="form-group row">
-      <label class="control-label col-sm-2 text-white  ml-5" for="source id">Source ID</label>
-      <div class="col-sm-7"> 
-        <input type="text" class="form-control rounded-pill shadow" id="source id">
+  <div class="form-group row mx-4">
+    <label class="control-label col-sm-3 offset-sm-2 text-white" for="source id"
+      >Source ID</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control rounded-pill shadow"
+        id="source id"
+      />
+    </div>
+  </div>
+  <div class="form-group row mx-4">
+    <label
+      class="control-label col-sm-3 offset-sm-2 text-white"
+      for="destination id"
+      >Destination ID</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control rounded-pill shadow"
+        id="destination id"
+      />
+    </div>
+  </div>
+  <div class="form-group row mx-4">
+    <div class="col-sm-7 offset-sm-5">
+      <div class="checkbox-label text-white px-4">
+        <label
+          ><input
+            type="checkbox"
+            name="serviceAccounts"
+            class="checkbox"
+          />&nbsp; Service Accounts</label
+        >
       </div>
     </div>
-    <div class="form-group row">
-      <label class="control-label col-sm-2 text-white  ml-5" for="destination id">Destination ID</label>
-      <div class="col-sm-7">
-        <input type="text" class="form-control rounded-pill shadow" id="destination id">
-      </div>
+  </div>
+  <div class="form-group row mx-4">
+    <div class="col-sm-7 offset-sm-5">
+      <button
+        type="submit"
+        class="col-sm-2 btn btn-sm rounded-pill shadow bg-white text-dark mr-5"
+      >
+        Copy
+      </button>
+      <button
+        type="submit"
+        class="col-sm-2 btn btn-sm rounded-pill shadow bg-danger text-white"
+      >
+        Cancel
+      </button>
     </div>
-    <div class="form-group">        
-        <div class="col-sm-offset-3 col-sm-10 ml-5">
-          <div class="checkbox text-center text-white">
-            <label><input type="checkbox" name="service accounts">&nbsp; Service Accounts</label>
-          </div>
-        </div>
-    </div>
-    <div class="form-group">        
-        <div class="button text-center">
-          <button type="submit" class="btn btn-sm text-center rounded-pill shadow bg-white text-dark ml-1" style="width: 100px;">Copy</button>
-          <button type="submit" class="btn btn-sm text-center rounded-pill shadow bg-danger text-white ml-5" style="width: 100px;">Cancel</button>
-        </div>
-    </div>
+  </div>
 </form>
-<br>
+<br />

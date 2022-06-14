@@ -1,5 +1,10 @@
 h3 {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    font-size: 2vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 2vw;
+}
+
+#status {
+  height: 40vh;
+  border-radius: 2vw;
 }

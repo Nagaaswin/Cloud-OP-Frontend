@@ -1,12 +1,5 @@
 p {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    font-size: 1vw;
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-
+  font-family: "Quicksand", sans-serif;
+  font-weight: 200;
+  font-size: 0.75vw;
 }

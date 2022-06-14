@@ -1,7 +1,10 @@
+.root {
+  height: 100vh;
+}
+
 .row {
   margin: auto;
 }
-
 .summary {
   background: linear-gradient(
     180deg,
@@ -15,4 +18,10 @@
   max-height: 100%;
   margin-bottom: 3%;
   margin-top: 3%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
 }

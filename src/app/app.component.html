@@ -1,8 +1,10 @@
-<div class="container-fluid row mx-2 my-auto">
+<div class="container-fluid row mx-0 root">
   <div class="col-sm-4 summary">
     <app-header></app-header>
     <router-outlet name="summary"></router-outlet>
-    <app-footer></app-footer>
+    <div class="row">
+      <app-footer class="footer col-sm-11 offset-sm-1"></app-footer>
+    </div>
   </div>
   <div class="col-sm-8">
     <router-outlet></router-outlet>
