@@ -12,6 +12,8 @@ import { SizeComponent } from './size/size.component';
 import { SizeSummaryComponent } from './size/size-summary/size-summary.component';
 import { SizeTechnicalsComponent } from './size/size-technicals/size-technicals.component';
 import { SizeStatusComponent } from './size/size-status/size-status.component';
+import { CloudOpRxStompService } from './websocket/cloud-op-rx-stomp.service';
+import { cloudOPrxStompServiceFactory } from './websocket/cloud-op-rx-stomp-service-factory';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,12 @@ import { SizeStatusComponent } from './size/size-status/size-status.component';
     SizeStatusComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  providers: [
+    {
+      provide: CloudOpRxStompService,
+      useFactory: cloudOPrxStompServiceFactory,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
