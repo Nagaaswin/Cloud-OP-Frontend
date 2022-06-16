@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "autoRclone-frontend": {
+    "cloud-op-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/auto-rclone-frontend",
+            "outputPath": "dist/cloud-op-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "autoRclone-frontend:build:production"
+              "browserTarget": "cloud-op-frontend:build:production"
             },
             "development": {
-              "browserTarget": "autoRclone-frontend:build:development"
+              "browserTarget": "cloud-op-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "autoRclone-frontend:build"
+            "browserTarget": "cloud-op-frontend:build"
           }
         },
         "test": {
@@ -95,5 +95,5 @@
       }
     }
   },
-  "defaultProject": "autoRclone-frontend"
+  "defaultProject": "cloud-op-frontend"
 }
