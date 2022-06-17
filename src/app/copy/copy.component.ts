@@ -5,11 +5,12 @@ import { Message } from '@stomp/stompjs';
 import { Subscription } from 'rxjs';
 import {
   COPY_PATH,
-  COPY_STATUS_PUBLISH_ENDPOINT,
   COPY_STATUS_SUBSCRIBE_ENDPOINT,
+  NO_PROCESS_RUNNING,
 } from '../cloud-op-constants';
 import { User } from '../model/user.model';
 import { StatusResponse } from '../model/status.model';
+import { CopyService } from './copy.service';
 
 @Component({
   selector: 'app-copy',
@@ -17,12 +18,12 @@ import { StatusResponse } from '../model/status.model';
   styleUrls: ['./copy.component.css'],
 })
 export class CopyComponent implements OnInit, OnDestroy {
-  copyStatusMsgs: string[] = [];
   private topicSubscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
-    private cloudOpRxStompService: CloudOpRxStompService
+    private cloudOpRxStompService: CloudOpRxStompService,
+    private copyService: CopyService
   ) {}
 
   ngOnInit(): void {
@@ -33,21 +34,17 @@ export class CopyComponent implements OnInit, OnDestroy {
       .watch(COPY_STATUS_SUBSCRIBE_ENDPOINT)
       .subscribe((message: Message) => {
         const statusResponse: StatusResponse = JSON.parse(message.body);
-        for (let msg of statusResponse.statusMsges) {
-          this.copyStatusMsgs.push(msg);
+        if (statusResponse.statusMsges != undefined) {
+          for (let msg of statusResponse.statusMsges) {
+            this.copyService.onMessageReceived(msg);
+          }
+        } else {
+          this.copyService.onMessageReceived(NO_PROCESS_RUNNING);
         }
       });
-    this.onSendMessage();
   }
 
   ngOnDestroy() {
     this.topicSubscription.unsubscribe();
-  }
-
-  onSendMessage() {
-    this.cloudOpRxStompService.publish({
-      destination: COPY_STATUS_PUBLISH_ENDPOINT,
-      body: JSON.stringify(new User()),
-    });
   }
 }

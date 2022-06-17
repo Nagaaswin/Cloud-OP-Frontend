@@ -1,2 +1,6 @@
 <h3 class="ml-2 mt-5 text-center lead text-white">Copy Status</h3>
-<div class="text-dark bg-white shadow my-3 mx-5" id="status"></div>
+<div class="text-dark bg-white shadow my-3 mx-5 p-3" id="status">
+  <p *ngFor="let msg of statusMsges">
+    {{ msg }}
+  </p>
+</div>

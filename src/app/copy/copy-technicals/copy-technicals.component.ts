@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-copy-technicals',
   templateUrl: './copy-technicals.component.html',
   styleUrls: ['./copy-technicals.component.css'],
 })
-export class CopyTechnicalsComponent implements OnInit {
+export class CopyTechnicalsComponent {
+  copyForm: FormGroup;
   constructor() {
-    /* TODO document why this constructor is empty */
+    this.copyForm = new FormGroup({
+      srcId: new FormControl(null, [Validators.required]),
+      destId: new FormControl(null, [Validators.required]),
+      serviceAccounts: new FormControl(false),
+    });
   }
 
-  ngOnInit(): void {
-    // TODO document why this method 'ngOnInit' is empty
+  oncopy() {
+    /* TODO document why this method 'oncopy' is empty */
   }
 }

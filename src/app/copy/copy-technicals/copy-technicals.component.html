@@ -3,30 +3,32 @@
     DRIVE DETAILS
   </h3>
 </nav>
-<form class="form-horizontal">
+<form class="form-horizontal" [formGroup]="copyForm" (ngSubmit)="oncopy()">
   <div class="form-group row mx-4">
-    <label class="control-label col-sm-3 offset-sm-2 text-white" for="source id"
+    <label class="control-label col-sm-3 offset-sm-2 text-white" for="sourceId"
       >Source ID</label
     >
     <div class="col-sm-7">
       <input
         type="text"
         class="form-control rounded-pill shadow"
-        id="source id"
+        id="sourceId"
+        formControlName="srcId"
       />
     </div>
   </div>
   <div class="form-group row mx-4">
     <label
       class="control-label col-sm-3 offset-sm-2 text-white"
-      for="destination id"
+      for="destinationId"
       >Destination ID</label
     >
     <div class="col-sm-7">
       <input
         type="text"
         class="form-control rounded-pill shadow"
-        id="destination id"
+        id="destinationId"
+        formControlName="destId"
       />
     </div>
   </div>
@@ -38,6 +40,7 @@
             type="checkbox"
             name="serviceAccounts"
             class="checkbox"
+            formControlName="serviceAccounts"
           />&nbsp; Service Accounts</label
         >
       </div>
@@ -48,6 +51,7 @@
       <button
         type="submit"
         class="col-sm-2 btn btn-sm rounded-pill shadow bg-white text-dark mr-5"
+        [disabled]="!copyForm.valid"
       >
         Copy
       </button>

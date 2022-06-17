@@ -14,6 +14,7 @@ import { SizeTechnicalsComponent } from './size/size-technicals/size-technicals.
 import { SizeStatusComponent } from './size/size-status/size-status.component';
 import { CloudOpRxStompService } from './websocket/cloud-op-rx-stomp.service';
 import { cloudOPrxStompServiceFactory } from './websocket/cloud-op-rx-stomp-service-factory';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { cloudOPrxStompServiceFactory } from './websocket/cloud-op-rx-stomp-serv
     SizeTechnicalsComponent,
     SizeStatusComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [
     {
       provide: CloudOpRxStompService,
