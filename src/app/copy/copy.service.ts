@@ -8,6 +8,8 @@ import {
   LOCAL_STORAGE_KEY,
   CLOUD_OP_APPLICATION_PATH,
   STOP_ENDPOINT,
+  STATUS_CALL_INTERVAL_IN_MS,
+  RESPONSE_MSG_TIMEOUT_IN_MS,
 } from '../shared/cloud-op.constants';
 import { CopyRequest } from '../shared/model/copy.request.model';
 import { User } from '../shared/model/user.model';
@@ -21,6 +23,7 @@ export class CopyService {
   isNoProcessRunning: boolean = false;
   isTechinalError: boolean = false;
   isCopySuccess: boolean = false;
+  statusMsgTask: any;
   constructor(
     private cloudOpRxStompService: CloudOpRxStompService,
     private http: HttpClient
@@ -46,11 +49,17 @@ export class CopyService {
       )
       .pipe(catchError(this.handleError))
       .subscribe((responseData) => {
+        this.statusMsgTask = setInterval(
+          this.onSendMessage,
+          STATUS_CALL_INTERVAL_IN_MS
+        );
         this.isCopySuccess = true;
-        console.log(responseData);
         if (responseData.userId != null) {
           localStorage.setItem(LOCAL_STORAGE_KEY, responseData.userId);
         }
+        setTimeout(() => {
+          this.isCopySuccess = false;
+        }, RESPONSE_MSG_TIMEOUT_IN_MS);
       });
   }
 
@@ -65,7 +74,8 @@ export class CopyService {
       )
       .pipe(catchError(this.handleError))
       .subscribe((responseData) => {
-        console.log(responseData);
+        clearInterval(this.statusMsgTask);
+        console.log('Stop Copy response -> ' + responseData);
       });
   }
 

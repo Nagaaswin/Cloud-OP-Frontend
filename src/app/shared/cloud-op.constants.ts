@@ -7,3 +7,5 @@ export const CLOUD_OP_APPLICATION_PATH = '/cloud-op';
 export const COPY_ENDPOINT = '/copy';
 export const SETUP_ENDPOINT = '/setup';
 export const STOP_ENDPOINT = '/stop';
+export const STATUS_CALL_INTERVAL_IN_MS = 100;
+export const RESPONSE_MSG_TIMEOUT_IN_MS = 5000;
