@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  websocket: '/cloud-op/websocket',
-  cloudOpBaseUrl: '',
+  websocket: 'ws://localhost:5000/websocket',
+  cloudOpBaseUrl: 'http://localhost:5000',
 };

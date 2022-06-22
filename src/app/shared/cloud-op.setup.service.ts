@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {
   LOCAL_STORAGE_KEY,
-  CLOUD_OP_APPLICATION_PATH,
   SETUP_ENDPOINT,
   STATUS_CALL_INTERVAL_IN_MS,
 } from './cloud-op.constants';
@@ -18,10 +17,7 @@ export class CloudOPSetupService {
 
   appSetup() {
     this.http
-      .post<User>(
-        environment.cloudOpBaseUrl + CLOUD_OP_APPLICATION_PATH + SETUP_ENDPOINT,
-        new User()
-      )
+      .post<User>(environment.cloudOpBaseUrl + SETUP_ENDPOINT, new User())
       .subscribe((responseData) => {
         this.setupCopyService();
         if (responseData.userId != null) {

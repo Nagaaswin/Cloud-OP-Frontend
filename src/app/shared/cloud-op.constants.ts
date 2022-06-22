@@ -3,7 +3,6 @@ export const COPY_STATUS_SUBSCRIBE_ENDPOINT = '/topic/copy/status-msg';
 export const LOCAL_STORAGE_KEY = 'CLOUD-OP-KEY';
 export const COPY_PATH = 'copy';
 export const NO_PROCESS_RUNNING = 'Currently, No Process is Running.';
-export const CLOUD_OP_APPLICATION_PATH = '/cloud-op';
 export const COPY_ENDPOINT = '/copy';
 export const SETUP_ENDPOINT = '/setup';
 export const STOP_ENDPOINT = '/stop';

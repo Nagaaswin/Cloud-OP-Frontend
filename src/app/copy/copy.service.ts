@@ -6,7 +6,6 @@ import {
   COPY_ENDPOINT,
   COPY_STATUS_PUBLISH_ENDPOINT,
   LOCAL_STORAGE_KEY,
-  CLOUD_OP_APPLICATION_PATH,
   STOP_ENDPOINT,
   STATUS_CALL_INTERVAL_IN_MS,
   RESPONSE_MSG_TIMEOUT_IN_MS,
@@ -43,12 +42,10 @@ export class CopyService {
   startCopying(copyReq: CopyRequest) {
     console.log(copyReq);
     this.http
-      .post<User>(
-        environment.cloudOpBaseUrl + CLOUD_OP_APPLICATION_PATH + COPY_ENDPOINT,
-        copyReq
-      )
+      .post<User>(environment.cloudOpBaseUrl + COPY_ENDPOINT, copyReq)
       .pipe(catchError(this.handleError))
       .subscribe((responseData) => {
+        this.onSendMessage();
         this.statusMsgTask = setInterval(
           this.onSendMessage,
           STATUS_CALL_INTERVAL_IN_MS
@@ -66,10 +63,7 @@ export class CopyService {
   stopCopying() {
     this.http
       .post<string>(
-        environment.cloudOpBaseUrl +
-          CLOUD_OP_APPLICATION_PATH +
-          COPY_ENDPOINT +
-          STOP_ENDPOINT,
+        environment.cloudOpBaseUrl + COPY_ENDPOINT + STOP_ENDPOINT,
         new User()
       )
       .pipe(catchError(this.handleError))

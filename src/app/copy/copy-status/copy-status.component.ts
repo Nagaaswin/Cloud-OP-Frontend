@@ -17,7 +17,7 @@ export class CopyStatusComponent implements OnInit, OnDestroy {
     this.subscription = this.copyService.copyStatusMsgs.subscribe(
       (msg: string) => {
         if (msg === NO_PROCESS_RUNNING) {
-          clearInterval(this.copyService.statusMsgTask);
+          // clearInterval(this.copyService.statusMsgTask);
           this.copyService.isNoProcessRunning = true;
         }
         this.statusMsges.push(msg);
