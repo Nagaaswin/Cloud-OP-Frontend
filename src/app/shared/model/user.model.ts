@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from '../cloud-op-constants';
+import { LOCAL_STORAGE_KEY } from '../cloud-op.constants';
 
 export class User {
   public userId: string | null;

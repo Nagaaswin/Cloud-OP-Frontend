@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CopyRequest } from 'src/app/shared/model/copy.request.model';
+import { CopyService } from '../copy.service';
 
 @Component({
   selector: 'app-copy-technicals',
@@ -8,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CopyTechnicalsComponent {
   copyForm: FormGroup;
-  constructor() {
+  constructor(private copyService: CopyService) {
     this.copyForm = new FormGroup({
       srcId: new FormControl(null, [Validators.required]),
       destId: new FormControl(null, [Validators.required]),
@@ -16,7 +18,46 @@ export class CopyTechnicalsComponent {
     });
   }
 
+  isNoProcessRunning(): boolean {
+    return this.copyService.isNoProcessRunning;
+  }
+
   oncopy() {
-    /* TODO document why this method 'oncopy' is empty */
+    if (this.copyForm.valid && this.isNoProcessRunning()) {
+      this.updateRequestState();
+      const copyData = this.copyForm.value;
+      const copyReq = new CopyRequest(
+        copyData.srcId,
+        copyData.destId,
+        copyData.serviceAccounts
+      );
+      this.copyService.startCopying(copyReq);
+    }
+  }
+
+  onCancel() {
+    if (!this.isNoProcessRunning()) {
+      this.updateRequestState();
+      this.copyService.stopCopying();
+    }
+  }
+
+  isRequestSuccess(): boolean {
+    if (this.copyService.isCopySuccess) {
+      return true;
+    }
+    return false;
+  }
+
+  isRequestFailed(): boolean {
+    if (this.copyService.isTechinalError) {
+      return true;
+    }
+    return false;
+  }
+
+  private updateRequestState() {
+    this.copyService.isCopySuccess = false;
+    this.copyService.isTechinalError = false;
   }
 }

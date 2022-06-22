@@ -50,14 +50,16 @@
     <div class="col-sm-7 offset-sm-5">
       <button
         type="submit"
-        class="col-sm-2 btn btn-sm rounded-pill shadow bg-white text-dark mr-5"
-        [disabled]="!copyForm.valid"
+        class="col-sm-2 btn btn-sm rounded-pill shadow bg-light text-dark mr-5"
+        [disabled]="!copyForm.valid || !isNoProcessRunning()"
       >
         Copy
       </button>
       <button
-        type="submit"
+        type="button"
         class="col-sm-2 btn btn-sm rounded-pill shadow bg-danger text-white"
+        [disabled]="isNoProcessRunning()"
+        (click)="onCancel()"
       >
         Cancel
       </button>
@@ -65,3 +67,11 @@
   </div>
 </form>
 <br />
+<div class="http-response-msg">
+  <p class="text-center text-danger-color" [hidden]="!isRequestFailed()">
+    There is some technical error; please try again.
+  </p>
+  <p class="text-center text-success-color" [hidden]="!isRequestSuccess()">
+    Copy started successfully.
+  </p>
+</div>

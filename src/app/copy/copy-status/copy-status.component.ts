@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NO_PROCESS_RUNNING } from 'src/app/shared/cloud-op.constants';
 import { CopyService } from '../copy.service';
 
 @Component({
@@ -15,6 +16,9 @@ export class CopyStatusComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.copyService.copyStatusMsgs.subscribe(
       (msg: string) => {
+        if (msg === NO_PROCESS_RUNNING) {
+          this.copyService.isNoProcessRunning = true;
+        }
         this.statusMsges.push(msg);
       }
     );

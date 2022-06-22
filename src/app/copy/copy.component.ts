@@ -7,9 +7,9 @@ import {
   COPY_PATH,
   COPY_STATUS_SUBSCRIBE_ENDPOINT,
   NO_PROCESS_RUNNING,
-} from '../cloud-op-constants';
-import { User } from '../model/user.model';
-import { StatusResponse } from '../model/status.model';
+} from '../shared/cloud-op.constants';
+import { User } from '../shared/model/user.model';
+import { StatusResponse } from '../shared/model/status.model';
 import { CopyService } from './copy.service';
 
 @Component({
