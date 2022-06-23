@@ -15,9 +15,7 @@ import { SizeStatusComponent } from './size/size-status/size-status.component';
 import { CloudOpRxStompService } from './websocket/cloud-op-rx-stomp.service';
 import { cloudOPrxStompServiceFactory } from './websocket/cloud-op-rx-stomp-service-factory';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CopyService } from './copy/copy.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CloudOPSetupService } from './shared/cloud-op.setup.service';
 
 @NgModule({
   declarations: [
@@ -43,12 +41,6 @@ import { CloudOPSetupService } from './shared/cloud-op.setup.service';
     {
       provide: CloudOpRxStompService,
       useFactory: cloudOPrxStompServiceFactory,
-    },
-    {
-      provide: CopyService,
-    },
-    {
-      provide: CloudOPSetupService,
     },
   ],
   bootstrap: [AppComponent],

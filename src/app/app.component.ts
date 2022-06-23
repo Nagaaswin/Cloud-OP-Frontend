@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CopyService } from './copy/copy.service';
 import { CloudOPSetupService } from './shared/cloud-op.setup.service';
 
 @Component({
@@ -6,10 +8,25 @@ import { CloudOPSetupService } from './shared/cloud-op.setup.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'Cloud-OP';
-  constructor(private setupService: CloudOPSetupService) {}
+  setupSubscription: Subscription | undefined;
+  constructor(
+    private setupService: CloudOPSetupService,
+    private copyService: CopyService
+  ) {}
+
   ngOnInit(): void {
-    this.setupService.appSetup();
+    this.setupSubscription = this.setupService.appSetup().subscribe((user) => {
+      this.setupService.assignLocalStorage(user);
+      this.setupService.setupCompleted.next(true);
+      this.copyService.setupCopyStatusReq();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.setupSubscription != undefined) {
+      this.setupSubscription.unsubscribe();
+    }
   }
 }

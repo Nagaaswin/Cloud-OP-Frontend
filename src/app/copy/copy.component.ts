@@ -6,10 +6,12 @@ import { Subscription } from 'rxjs';
 import {
   COPY_PATH,
   COPY_STATUS_SUBSCRIBE_ENDPOINT,
+  LOCAL_STORAGE_KEY,
   NO_PROCESS_RUNNING,
 } from '../shared/cloud-op.constants';
 import { StatusResponse } from '../shared/model/status.model';
 import { CopyService } from './copy.service';
+import { CloudOPSetupService } from '../shared/cloud-op.setup.service';
 
 @Component({
   selector: 'app-copy',
@@ -17,20 +19,37 @@ import { CopyService } from './copy.service';
   styleUrls: ['./copy.component.css'],
 })
 export class CopyComponent implements OnInit, OnDestroy {
-  private topicSubscription: Subscription = new Subscription();
+  copyStatusSubscription: Subscription | undefined;
+  setupCompletedSubcrip: Subscription | undefined;
 
   constructor(
     private router: Router,
     private cloudOpRxStompService: CloudOpRxStompService,
-    private copyService: CopyService
+    private copyService: CopyService,
+    private setupService: CloudOPSetupService
   ) {}
 
   ngOnInit(): void {
     this.router.navigate([
       { outlets: { primary: COPY_PATH, summary: COPY_PATH } },
     ]);
-    this.topicSubscription = this.cloudOpRxStompService
-      .watch(COPY_STATUS_SUBSCRIBE_ENDPOINT)
+
+    this.setupCompletedSubcrip = this.setupService.setupCompleted.subscribe(
+      () => {
+        this.subscribeCopyStatus();
+      }
+    );
+
+    if (localStorage.getItem(LOCAL_STORAGE_KEY) != null) {
+      this.subscribeCopyStatus();
+    }
+  }
+
+  subscribeCopyStatus() {
+    this.copyStatusSubscription = this.cloudOpRxStompService
+      .watch(
+        COPY_STATUS_SUBSCRIBE_ENDPOINT + localStorage.getItem(LOCAL_STORAGE_KEY)
+      )
       .subscribe((message: Message) => {
         const statusResponse: StatusResponse = JSON.parse(message.body);
         if (statusResponse.statusMsges != undefined) {
@@ -41,9 +60,16 @@ export class CopyComponent implements OnInit, OnDestroy {
           this.copyService.onMessageReceived(NO_PROCESS_RUNNING);
         }
       });
+    this.copyService.onSendMessage();
   }
 
   ngOnDestroy() {
-    this.topicSubscription.unsubscribe();
+    if (this.copyStatusSubscription != undefined) {
+      this.copyStatusSubscription.unsubscribe();
+    }
+    if (this.setupCompletedSubcrip != undefined) {
+      this.setupCompletedSubcrip.unsubscribe();
+    }
+    this.copyService.isNoProcessRunning = false;
   }
 }

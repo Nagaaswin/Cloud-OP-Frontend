@@ -5,11 +5,11 @@ import { environment } from 'src/environments/environment';
 import {
   COPY_ENDPOINT,
   COPY_STATUS_PUBLISH_ENDPOINT,
-  LOCAL_STORAGE_KEY,
   STOP_ENDPOINT,
   STATUS_CALL_INTERVAL_IN_MS,
   RESPONSE_MSG_TIMEOUT_IN_MS,
 } from '../shared/cloud-op.constants';
+import { CloudOPSetupService } from '../shared/cloud-op.setup.service';
 import { CopyRequest } from '../shared/model/copy.request.model';
 import { User } from '../shared/model/user.model';
 import { CloudOpRxStompService } from '../websocket/cloud-op-rx-stomp.service';
@@ -25,6 +25,7 @@ export class CopyService {
   statusMsgTask: any;
   constructor(
     private cloudOpRxStompService: CloudOpRxStompService,
+    private setupService: CloudOPSetupService,
     private http: HttpClient
   ) {}
 
@@ -40,24 +41,29 @@ export class CopyService {
   }
 
   startCopying(copyReq: CopyRequest) {
-    console.log(copyReq);
     this.http
       .post<User>(environment.cloudOpBaseUrl + COPY_ENDPOINT, copyReq)
       .pipe(catchError(this.handleError))
-      .subscribe((responseData) => {
-        this.onSendMessage();
-        this.statusMsgTask = setInterval(
-          this.onSendMessage,
-          STATUS_CALL_INTERVAL_IN_MS
-        );
-        this.isCopySuccess = true;
-        if (responseData.userId != null) {
-          localStorage.setItem(LOCAL_STORAGE_KEY, responseData.userId);
-        }
-        setTimeout(() => {
-          this.isCopySuccess = false;
-        }, RESPONSE_MSG_TIMEOUT_IN_MS);
+      .subscribe((user) => {
+        this.setupCopyStatusReq();
+        this.setupService.assignLocalStorage(user);
+        this.setCopyResViewStatus();
       });
+  }
+
+  setupCopyStatusReq() {
+    this.onSendMessage();
+    this.statusMsgTask = setInterval(
+      this.onSendMessage,
+      STATUS_CALL_INTERVAL_IN_MS
+    );
+  }
+
+  setCopyResViewStatus() {
+    this.isCopySuccess = true;
+    setTimeout(() => {
+      this.isCopySuccess = false;
+    }, RESPONSE_MSG_TIMEOUT_IN_MS);
   }
 
   stopCopying() {

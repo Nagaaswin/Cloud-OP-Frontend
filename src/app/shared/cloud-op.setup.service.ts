@@ -1,36 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import {
-  LOCAL_STORAGE_KEY,
-  SETUP_ENDPOINT,
-  STATUS_CALL_INTERVAL_IN_MS,
-} from './cloud-op.constants';
+import { LOCAL_STORAGE_KEY, SETUP_ENDPOINT } from './cloud-op.constants';
 import { User } from './model/user.model';
 import { Injectable } from '@angular/core';
-import { CopyService } from '../copy/copy.service';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CloudOPSetupService {
-  constructor(private http: HttpClient, private copyService: CopyService) {}
+  setupCompleted = new Subject<boolean>();
+  constructor(private http: HttpClient) {}
 
-  appSetup() {
-    this.http
-      .post<User>(environment.cloudOpBaseUrl + SETUP_ENDPOINT, new User())
-      .subscribe((responseData) => {
-        this.setupCopyService();
-        if (responseData.userId != null) {
-          localStorage.setItem(LOCAL_STORAGE_KEY, responseData.userId);
-        }
-      });
+  appSetup(): Observable<User> {
+    return this.http.post<User>(
+      environment.cloudOpBaseUrl + SETUP_ENDPOINT,
+      new User()
+    );
   }
 
-  private setupCopyService() {
-    this.copyService.onSendMessage();
-    this.copyService.statusMsgTask = setInterval(
-      this.copyService.onSendMessage,
-      STATUS_CALL_INTERVAL_IN_MS
-    );
+  assignLocalStorage(user: User) {
+    if (user.userId != null) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, user.userId);
+    }
   }
 }
