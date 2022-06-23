@@ -7,4 +7,10 @@ h3 {
 #status {
   height: 40vh;
   border-radius: 2vw;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+p {
+  margin: auto;
 }

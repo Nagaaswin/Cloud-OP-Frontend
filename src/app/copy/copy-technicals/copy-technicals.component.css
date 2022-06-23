@@ -26,3 +26,18 @@ h3 {
   font-weight: 500;
   font-size: 1.25vw;
 }
+
+.http-response-msg {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 1vw;
+  height: 4vh;
+}
+
+.text-success-color {
+  color: #00693e;
+}
+
+.text-danger-color {
+  color: #ef0107;
+}
