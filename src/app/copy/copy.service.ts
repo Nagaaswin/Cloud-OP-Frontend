@@ -8,6 +8,7 @@ import {
   STOP_ENDPOINT,
   STATUS_CALL_INTERVAL_IN_MS,
   RESPONSE_MSG_TIMEOUT_IN_MS,
+  NO_PROCESS_RUNNING,
 } from '../shared/cloud-op.constants';
 import { CloudOPSetupService } from '../shared/cloud-op.setup.service';
 import { CopyRequest } from '../shared/model/copy.request.model';
@@ -52,9 +53,8 @@ export class CopyService {
   }
 
   setupCopyStatusReq() {
-    this.onSendMessage();
     this.statusMsgTask = setInterval(
-      this.onSendMessage,
+      this.onSendMessage.bind(this),
       STATUS_CALL_INTERVAL_IN_MS
     );
   }
@@ -68,14 +68,15 @@ export class CopyService {
 
   stopCopying() {
     this.http
-      .post<string>(
+      .put<string>(
         environment.cloudOpBaseUrl + COPY_ENDPOINT + STOP_ENDPOINT,
         new User()
       )
       .pipe(catchError(this.handleError))
       .subscribe((responseData) => {
-        clearInterval(this.statusMsgTask);
         console.log('Stop Copy response -> ' + responseData);
+        clearInterval(this.statusMsgTask);
+        this.copyStatusMsgs.next(NO_PROCESS_RUNNING);
       });
   }
 
