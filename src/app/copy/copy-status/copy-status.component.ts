@@ -6,7 +6,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NO_PROCESS_RUNNING } from 'src/app/shared/cloud-op.constants';
+import {
+  NO_PROCESS_RUNNING,
+  SOMETHING_WENT_WRONG,
+} from 'src/app/shared/cloud-op.constants';
 import { CopyService } from '../copy.service';
 
 @Component({
@@ -24,16 +27,21 @@ export class CopyStatusComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.copyService.copyStatusMsgs.subscribe(
       (msg: string) => {
-        if (msg === NO_PROCESS_RUNNING) {
+        if (msg === NO_PROCESS_RUNNING || msg === SOMETHING_WENT_WRONG) {
           clearInterval(this.copyService.statusMsgTask);
           if (!this.copyService.isNoProcessRunning) {
-            this.statusMsges.push(NO_PROCESS_RUNNING);
+            if (msg === NO_PROCESS_RUNNING) {
+              this.statusMsges.push(NO_PROCESS_RUNNING);
+            } else if (msg === SOMETHING_WENT_WRONG) {
+              this.statusMsges.push(SOMETHING_WENT_WRONG);
+            }
           }
           this.copyService.isNoProcessRunning = true;
         } else {
+          this.copyService.isNoProcessRunning = false;
           this.statusMsges.push(msg);
-          this.scrollDown();
         }
+        this.scrollDown();
       }
     );
   }
