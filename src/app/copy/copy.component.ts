@@ -52,7 +52,7 @@ export class CopyComponent implements OnInit, OnDestroy {
       )
       .subscribe((message: Message) => {
         const statusResponse: StatusResponse = JSON.parse(message.body);
-        if (statusResponse.statusMsges != undefined) {
+        if (statusResponse.statusMsges[0] != NO_PROCESS_RUNNING) {
           for (let msg of statusResponse.statusMsges) {
             this.copyService.onMessageReceived(msg);
           }

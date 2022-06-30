@@ -6,6 +6,6 @@ export const NO_PROCESS_RUNNING = 'Currently, No Process is Running.';
 export const COPY_ENDPOINT = '/copy';
 export const SETUP_ENDPOINT = '/setup';
 export const STOP_ENDPOINT = '/stop';
-export const STATUS_CALL_INTERVAL_IN_MS = 750;
+export const STATUS_CALL_INTERVAL_IN_MS = 1000;
 export const RESPONSE_MSG_TIMEOUT_IN_MS = 5000;
 export const SOMETHING_WENT_WRONG = 'Something Went Wrong. Please Try Again';
