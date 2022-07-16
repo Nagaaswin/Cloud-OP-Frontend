@@ -1,5 +1,10 @@
 .root {
   height: 100vh;
+  background: linear-gradient(
+    241.78deg,
+    #83a1ee 0.53%,
+    rgba(177, 134, 228, 0.68) 73.82%
+  );
 }
 
 .row {
