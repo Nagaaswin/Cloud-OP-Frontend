@@ -32,8 +32,21 @@
       />
     </div>
   </div>
+  <div class="form-group row mx-4" [hidden]="!copyForm.value.fileCopy">
+    <label class="control-label col-sm-3 offset-sm-2 text-white" for="fileName"
+      >File Name</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control rounded-pill shadow"
+        id="fileName"
+        formControlName="fileName"
+      />
+    </div>
+  </div>
   <div class="form-group row mx-4">
-    <div class="col-sm-7 offset-sm-5">
+    <div class="col-sm-4 offset-sm-5">
       <div class="checkbox-label text-white px-4">
         <label
           ><input
@@ -42,6 +55,18 @@
             class="checkbox"
             formControlName="serviceAccounts"
           />&nbsp; Service Accounts</label
+        >
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="checkbox-label text-white px-4">
+        <label
+          ><input
+            type="checkbox"
+            name="fileCopy"
+            class="checkbox"
+            formControlName="fileCopy"
+          />&nbsp; Copy File</label
         >
       </div>
     </div>

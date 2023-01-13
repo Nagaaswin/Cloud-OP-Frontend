@@ -15,6 +15,8 @@ export class CopyTechnicalsComponent {
       srcId: new FormControl(null, [Validators.required]),
       destId: new FormControl(null, [Validators.required]),
       serviceAccounts: new FormControl(false),
+      fileCopy: new FormControl(false),
+      fileName: new FormControl(null),
     });
   }
 
@@ -31,6 +33,10 @@ export class CopyTechnicalsComponent {
         copyData.destId,
         copyData.serviceAccounts
       );
+      if (copyData.fileCopy) {
+        copyReq.fileCopy = copyData.fileCopy;
+        copyReq.fileName = copyData.fileName;
+      }
       this.copyService.startCopying(copyReq);
     }
   }
