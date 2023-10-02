@@ -10,5 +10,13 @@ pipeline{
         echo "hello"
       }
     }
+    stage('Hoi') {
+      when {
+        branch "jenkinsTestCheck1"
+      }
+      steps {
+        echo "It is jenkinsTestCheck1"
+      }
+    }
   }
 }
